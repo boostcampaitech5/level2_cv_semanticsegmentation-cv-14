@@ -13,11 +13,11 @@ Bone Segmentation은 인공지능 분야에서 중요한 응용 분야 중 하�
 
 |  이름      | 역할                                                         | github                         |
 | :-------: | ------------------------------------------------------------ | ------------------------------ |
-|김용환       | yolox, yolov5x6 실험                                         | https://github.com/ |
-|김우진       | htc_Swin_L(22K), yolov5l6 + TTA 실험, EDA 수행               | https://github.com/    |
-|신건희       | Swin_L_Cascade R-CNN 실험, Oversampling 실험                 | https://github.com/   |
-|신중현       | Swin-T, L 기반 Cascade R-CNN, HTC 실험                       | https://github.com/    |
-|이종휘       | Centernet2, DyHead, Universenet 실험Augmentation 실험, Ensenble(WBF) 코드 | https://github.com/    |
+|김용환       |                                         | https://github.com/96namsan |
+|김우진       |              | https://github.com/    |
+|신건희       |                  | https://github.com/Rigel0718   |
+|신중현       |                        | https://github.com/Blackeyes0u0    |
+|이종휘       |                | https://github.com/gndldl    |
 
 
 
