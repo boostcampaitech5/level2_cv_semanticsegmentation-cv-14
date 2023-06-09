@@ -1,0 +1,15 @@
+SAVE_FILE_NAME : fcn_resnet50_best_model3.pt
+logging_wandb : True
+NUM_EPOCHS : 70
+IMAGE_ROOT : /opt/ml/input/train/DCM
+LABEL_ROOT : /opt/ml/input/train/outputs_json
+TEST_IMAGE_ROOT : /opt/ml/input/test/DCM
+BATCH_SIZE : 8
+LR : 1e-4
+VAL_EVERY : 1
+RANDOM_SEED : 21
+SAVED_DIR : ./workspace/results_baseline3/
+# validation set 0,1,2,3,4 중하나 선택
+VAL_NUM : 1
+START_TRAIN : True
+START_TEST : True
