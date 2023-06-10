@@ -33,6 +33,7 @@ parser.add_argument('--VAL_NUM', type=int, default=0)
 parser.add_argument('--logging_wandb', type=bool, default=False)
 parser.add_argument('--START_TRAIN', type=bool, default=False)
 parser.add_argument('--START_TEST', type=bool, default=False)
+parser.add_argument('--wandb_project', type=str, default='test_segmentation')
 parser.add_argument('-c', '--config', help='Path to YAML configuration file')
 
 args = parser.parse_args()
@@ -56,9 +57,9 @@ CLASSES = [
 if args.logging_wandb :
     wandb.init(
         # set the wandb project where this run will be logged
-        project="TEST_SGH_Segmentation",
+        project=args.wandb_project,
         entity="hi-ai",
-        name=f"test_baseline_{timestr}",
+        name=f"{args.SAVE_FILE_NAME}_{timestr}",
         # track hyperparameters and run metadata
         config={
         "learning_rate": args.LR,
@@ -103,6 +104,7 @@ if args.START_TRAIN :
     model.classifier[4] = nn.Conv2d(512, len(CLASSES), kernel_size=1)
     # Loss function 정의
     criterion = nn.BCEWithLogitsLoss()
+    # criterion = nn.CosineEmbeddingLoss()
     # Optimizer 정의
     optimizer = optim.Adam(params=model.parameters(), lr=args.LR, weight_decay=1e-6)
 

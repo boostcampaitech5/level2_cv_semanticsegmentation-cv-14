@@ -1,0 +1,45 @@
+wandb_version: 1
+
+learning_rate:
+  desc: null
+  value: 0.0001
+architecture:
+  desc: null
+  value: pretrained
+dataset:
+  desc: null
+  value: hand_bone_image
+epochs:
+  desc: null
+  value: 70
+seed:
+  desc: null
+  value: 21
+batch_size:
+  desc: null
+  value: 8
+_wandb:
+  desc: null
+  value:
+    python_version: 3.8.5
+    cli_version: 0.15.4
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1686339490.195869
+    t:
+      1:
+      - 1
+      - 5
+      - 41
+      - 53
+      - 55
+      - 80
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.8.5
+      5: 0.15.4
+      8:
+      - 5
