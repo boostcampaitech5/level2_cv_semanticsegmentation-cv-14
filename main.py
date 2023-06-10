@@ -28,12 +28,14 @@ parser.add_argument('--LR', type=float, default=1e-4)
 parser.add_argument('--NUM_EPOCHS', type=int, default=80)
 parser.add_argument('--VAL_EVERY', type=int, default=1)
 parser.add_argument('--RANDOM_SEED', type=int, default=21)
+parser.add_argument('--SET_SEED', type=bool, default=True)  # False 로 바꾸면 set_seed함수가 적용 x
 parser.add_argument('--SAVED_DIR', type=str, default='./workspace/results_baseline2/')
 parser.add_argument('--VAL_NUM', type=int, default=0)
 parser.add_argument('--logging_wandb', type=bool, default=False)
 parser.add_argument('--START_TRAIN', type=bool, default=False)
 parser.add_argument('--START_TEST', type=bool, default=False)
 parser.add_argument('--wandb_project', type=str, default='test_segmentation')
+parser.add_argument('--optimizer', type=str, default='Adam')
 parser.add_argument('-c', '--config', help='Path to YAML configuration file')
 
 args = parser.parse_args()
@@ -105,10 +107,15 @@ if args.START_TRAIN :
     # Loss function 정의
     criterion = nn.BCEWithLogitsLoss()
     # criterion = nn.CosineEmbeddingLoss()
-    # Optimizer 정의
-    optimizer = optim.Adam(params=model.parameters(), lr=args.LR, weight_decay=1e-6)
 
-    set_seed(args.RANDOM_SEED)
+    # Optimizer 정의
+    # optimizer = optim.Adam(params=model.parameters(), lr=args.LR, weight_decay=1e-6)
+    # optimizer yaml로 설정할 수 있게 간단하게 바꿈 torch.optim에 있는 것만 str형식으로 그대로 기입하면 됨.
+    receive_optimizer = getattr(optim,args.optimizer)
+    optimizer = receive_optimizer(params=model.parameters(), lr=args.LR, weight_decay=1e-6)
+    
+    if args.SET_SEED :
+        set_seed(args.RANDOM_SEED)
 
     train(model, train_loader, valid_loader, criterion, optimizer, CLASSES=CLASSES, args=args)
 
