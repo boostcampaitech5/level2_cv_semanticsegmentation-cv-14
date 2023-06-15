@@ -22,7 +22,7 @@ def save_model(model, file_name, SAVED_DIR):
     output_path = os.path.join(SAVED_DIR, file_name)
     torch.save(model, output_path)
 
-def validation(epoch, model, best_dice, CLASSES, data_loader, criterion, logging_wandb, args ,thr=0.5):
+def validation(epoch, model, CLASSES,data_loader, criterion, logging_wandb ,thr=0.5):
     print(f'Start validation #{epoch:2d}')
     model.eval()
 
@@ -67,7 +67,6 @@ def validation(epoch, model, best_dice, CLASSES, data_loader, criterion, logging
     
     avg_dice = torch.mean(dices_per_class).item()
 
-    # train 에 있던 dice 가 best_dice인 경우 파일을 저장하는 것을 validation으로 옮겼다. 
     if logging_wandb :
         wandb.log({"avg_dice": avg_dice})
         for i, c in enumerate(CLASSES):
@@ -111,7 +110,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, CLASSES, args):
 
         # validation 주기에 따른 loss 출력 및 best model 저장
         if (epoch + 1) % args.VAL_EVERY == 0:
-            dice = validation(epoch + 1, model, best_dice=best_dice, data_loader= val_loader, criterion=criterion, logging_wandb=args.logging_wandb, CLASSES=CLASSES, args=args)
+            dice = validation(epoch + 1, model, data_loader=val_loader, criterion=criterion, logging_wandb=args.logging_wandb, CLASSES=CLASSES)
             
             if best_dice < dice:
                 print(f"Best performance at epoch: {epoch + 1}, {best_dice:.4f} -> {dice:.4f}")
